@@ -14,6 +14,16 @@ def hello_world(name=None):
                            runningip=get_ip())
 
 
+@app.route('/health')
+def health():
+    return 'I am healthy'
+
+
+@app.route('/ready')
+def ready():
+    return 'I am ready.'
+
+
 def get_magic_number():
     return randrange(0, 1000000000, 2)
 
