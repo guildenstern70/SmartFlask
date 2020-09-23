@@ -4,11 +4,13 @@ import socket
 
 app = Flask(__name__)
 
+VERSION = '1.0'
 
 @app.route('/')
 @app.route('/hello/<name>')
 def hello_world(name=None):
     return render_template('index.html',
+                           version=VERSION,
                            name=name,
                            magicnumber=get_magic_number(),
                            runningip=get_ip())
