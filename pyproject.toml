@@ -1,0 +1,7 @@
+[project]
+name = "SmartFlask"
+version = "0.1"
+dependencies = [
+    "Flask >= 2.3.2",
+    "cassandra-driver >= 3.28.0",
+]
