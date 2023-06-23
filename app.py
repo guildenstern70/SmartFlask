@@ -1,3 +1,12 @@
+#
+#  SmartFlask Project
+#
+#  Copyright (c) 2023 Alessio Saltarin
+#  This software is distributed under ISC License.
+#  See LICENSE.
+#
+
+
 from random import randrange
 from flask import Flask, render_template
 import socket
@@ -61,6 +70,7 @@ def get_env_var(var_name):
     except KeyError:
         pass
     return var_var
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
