@@ -1,0 +1,13 @@
+#
+#  SmartFlask Project
+#
+#  Copyright (c) 2023 Alessio Saltarin
+#  This software is distributed under ISC License.
+#  See LICENSE.
+#
+
+import cassandra
+
+
+def version():
+    return cassandra.__version__
