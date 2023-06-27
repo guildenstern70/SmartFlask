@@ -20,7 +20,7 @@ class CassandraConnect:
     """ Connect to Cassandra DB"""
     def __init__(self, flask_config):
         client_id = flask_config.config["CLIENT_ID"]
-        client_secret = flask_config.config["CLIENT_SECRET"]
+        client_secret = flask_config.config["SECRET_KEY"]
         cloud_config = {
             'secure_connect_bundle': 'secure-connect-axscassandradb.zip'
         }

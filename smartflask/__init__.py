@@ -7,10 +7,11 @@
 #
 
 import os
-from flask import Flask, render_template
-import smartflask.utils.environment as utils
+import smartflask._version as smartflask
+from flask import Flask
 from smartflask.db import cassandra
 from smartflask.db.cassandra import CassandraConnect
+from smartflask.pages.home import home_page
 
 
 def create_app(test_config=None):
@@ -20,8 +21,10 @@ def create_app(test_config=None):
                 static_url_path='')
     app.config.from_prefixed_env()
 
-    print("Smark Flask v." + str(app.config["SMARTFLASK_VERSION"]))
+    print("Smark Flask v." + smartflask.__version__)
     print("- Secret Key = " + app.config["SECRET_KEY"])
+
+    app.register_blueprint(home_page)
 
     cassandra_conn = CassandraConnect(app)
     employees = cassandra_conn.get_employees()
@@ -36,20 +39,6 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
-    @app.route('/')
-    def index(name=None):
-        context = {
-            "version": app.config["SMARTFLASK_VERSION"],
-            "version_name": utils.version_name(),
-            "environment": utils.environment_name(),
-            "name": name,
-            "cassandra_version": cassandra.version(),
-            "magicnumber": utils.magic_number(),
-            "runningip": utils.ip(),
-        }
-        return render_template('index.html',
-                               context=context)
 
     @app.route('/health')
     def health():

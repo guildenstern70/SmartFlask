@@ -28,18 +28,5 @@ def env_var(var_name):
     return var_var
 
 
-def environment_name():
-    env_name = env_var('ENVIRONMENT')
-    if env_name is None:
-        env_name = 'Dev'
-    return env_name
-
-
-def version_name():
-    ver_name = env_var('VERSION')
-    if ver_name is None:
-        ver_name = 'Dev'
-    return ver_name
-
 
 
