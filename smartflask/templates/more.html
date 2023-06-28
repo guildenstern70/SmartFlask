@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Students</h1>
+    <p class="fs-6 text-secondary"> Version {{ context.version }} </p>
+
+    <div class="row mt-5">
+        <div class="col-8">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">eMail</th>
+                    <th scope="col">Birthdate</th>
+                    <th scope="col">Number of Courses</th>
+                    <th scope="col">&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for student in context.students %}
+                    <tr>
+                        <th scope="row">{{ student.id }}</th>
+                        <td>{{ student.fullname }}</td>
+                        <td>{{ student.email }}</td>
+                        <td>{{ student.birthdate }}</td>
+                        <td>{{ student.number_of_courses }}</td>
+                        <td>
+                            <button type="button" class="btn btn-light btn-sm"><i class="bi-plus"></i></button>
+                            &nbsp;
+                            <button type="button" class="btn btn-light btn-sm"><i class="bi-trash"></i></button>
+                            &nbsp;
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            &nbsp;
+        </div>
+    </div>
+
+    <a href="/" class="btn btn-primary btn-lg mt-3" type="button">Back...</a>
+
+{% endblock %}
+
