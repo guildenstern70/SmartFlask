@@ -44,3 +44,9 @@ class CassandraConnect:
         for user_row in self._session.execute(statement):
             students.append(Student(user_row))
         return students
+
+    def delete_student(self, student_id):
+        query = "DELETE FROM student WHERE id = %s"
+        statement = SimpleStatement(query, fetch_size=10)
+        self._session.execute(statement, [student_id])
+        return True

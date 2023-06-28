@@ -29,7 +29,9 @@
                         <td>
                             <button type="button" class="btn btn-light btn-sm"><i class="bi-plus"></i></button>
                             &nbsp;
-                            <button type="button" class="btn btn-light btn-sm"><i class="bi-trash"></i></button>
+                            <button type="button" class="btn btn-light btn-sm"
+                                onclick="deleteEntry('{{ student.id }}');"
+                            ><i class="bi-trash"></i></button>
                             &nbsp;
                         </td>
                     </tr>
@@ -44,5 +46,27 @@
 
     <a href="/" class="btn btn-primary btn-lg mt-3" type="button">Back...</a>
 
+    <div id="deletemodal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Remove student?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to remove student #<span id="modal_student_id">000</span>?</p>
+                </div>
+                <div class="modal-footer">
+                    <a id="delete_confirm" href="#" type="button" class="btn btn-primary">OK</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ url_for('static', filename='js/delete.js') }}"></script>
 {% endblock %}
 

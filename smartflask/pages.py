@@ -8,7 +8,7 @@
 
 import smartflask._version as smartflask
 import smartflask.utils.environment as utils
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
 
 def setup_blueprint(cassandra_connection):
@@ -34,5 +34,11 @@ def setup_blueprint(cassandra_connection):
         }
         return render_template('more.html',
                                context=context)
+
+    @pages.route('/delete')
+    def delete_stundent():
+        student_id = request.args.get('student_id')
+        cassandra_connection.delete_student(student_id)
+        return more()
 
     return pages
