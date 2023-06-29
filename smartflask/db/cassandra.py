@@ -50,3 +50,19 @@ class CassandraConnect:
         statement = SimpleStatement(query, fetch_size=10)
         self._session.execute(statement, [student_id])
         return True
+
+    def add_student(self, student_dict):
+        # Get next id
+        query = "SELECT count(*) FROM student"
+        statement = SimpleStatement(query, fetch_size=1)
+        row = self._session.execute(statement).one()
+        next_id = int(row[0]) + 2
+        id = "AXS_00" + str(next_id)
+        number_of_courses = int(student_dict['numberofcourses'])
+        query = "INSERT INTO student (id, full_name, email, birth_date, number_of_courses) VALUES (%s, %s, %s, %s, %s)"
+        self._session.execute(query, (id,
+                                      student_dict['fullname'],
+                                      student_dict['email'],
+                                      student_dict['birthdate'],
+                                      number_of_courses))
+        return True

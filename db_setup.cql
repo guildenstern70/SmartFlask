@@ -1,6 +1,8 @@
 create keyspace smartflaskks with replication  = {'class': 'SimpleStrategy', 'replication_factor': '1' };
 use smartflask_ks;
 
+drop table if exists student;
+
 create table student(
 id text,
 full_name text,

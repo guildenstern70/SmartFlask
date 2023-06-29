@@ -6,7 +6,7 @@
     <p class="fs-6 text-secondary"> Version {{ context.version }} </p>
 
     <div class="row mt-5">
-        <div class="col-8">
+        <div class="col-9">
             <table class="table">
                 <thead>
                 <tr>
@@ -27,7 +27,7 @@
                         <td>{{ student.birthdate }}</td>
                         <td>{{ student.number_of_courses }}</td>
                         <td>
-                            <button type="button" class="btn btn-light btn-sm"><i class="bi-plus"></i></button>
+                            <button type="button" class="btn btn-light btn-sm"><i class="bi-pencil"></i></button>
                             &nbsp;
                             <button type="button" class="btn btn-light btn-sm"
                                 onclick="deleteEntry('{{ student.id }}');"
@@ -39,34 +39,37 @@
                 </tbody>
             </table>
         </div>
-        <div class="col">
+        <div class="col-3">
             &nbsp;
         </div>
     </div>
 
-    <a href="/" class="btn btn-primary btn-lg mt-3" type="button">Back...</a>
-
-    <div id="deletemodal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Remove student?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to remove student #<span id="modal_student_id">000</span>?</p>
-                </div>
-                <div class="modal-footer">
-                    <a id="delete_confirm" href="#" type="button" class="btn btn-primary">OK</a>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
+    <div class="mt-3">
+        <button type="button" class="btn btn-primary"
+                                    data-bs-toggle="modal" data-bs-target="#addmodal">
+            <span><i class="bi-plus"></i> Add new student</span>
+        </button>
+        <a href="/" class="btn btn-secondary" type="button">Back...</a>
     </div>
+
+
+    {% include 'delete_modal.html' %}
+    {% include 'add_modal.html' %}
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
+              <strong>ERROR</strong><br /> {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+      {% endif %}
+    {% endwith %}
 
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ url_for('static', filename='js/delete.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/more.js') }}"></script>
 {% endblock %}
 
